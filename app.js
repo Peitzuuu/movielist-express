@@ -2,6 +2,8 @@ const express = require('express')
 const { engine } = require('express-handlebars')
 const app = express()
 const port = 3000
+const movies = require('./public/jsons/movies.json').results
+const BASE_IMG_URL = 'https://movie-list.alphacamp.io/posters/'
 
 // Register `hbs.engine` with the Express app.
 app.engine('.hbs', engine({extname: '.hbs'}));
@@ -14,7 +16,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/movies', (req, res) => {
-  res.render('index')
+  res.render('index', { movies: movies, BASE_IMG_URL})
 })
 
 app.get('/movie/:id', (req, res) => {
